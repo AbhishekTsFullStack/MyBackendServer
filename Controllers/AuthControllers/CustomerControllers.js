@@ -1,3 +1,4 @@
+
 const CustomerModel = require("../../Models/AuthModels/CustomerModel")
 const jwt = require("jsonwebtoken")
 const { isEmail, isMobileNumber } = require("../utils");
@@ -9,6 +10,10 @@ require('dotenv').config
 const SignupUser = async (req, res) => {
 
     try {
+        // lets validate the data
+        // const { error, value } = SingupValidate(req.body);
+        // if (error) return res.status(400).json(error.details[0].message);
+
 
         // username avialability check
         const isUserFound = await CustomerModel.findOne({ mobileNo: req.body.mobileNo })
@@ -20,10 +25,11 @@ const SignupUser = async (req, res) => {
         // // make the password as a hash password 
         // const salt = await bycrypt.genSalt(10)
         // const hashPassword = await bycrypt.hash(req.body.password, salt)
-        // const hashPasword = await argon.hash(req.body.password)
+
         // my formdata
         const formdata = new CustomerModel({
             ...req.body,
+
         })
 
         const saveData = await formdata.save()
@@ -55,12 +61,11 @@ const LoginUser = async (req, res) => {
         if (!User) return res.status(404).json({ message: `${dataType} Incorrect` });
         const { password, ...rest } = User
 
+        // compare the password 
         const compare = User.password === req.body.password ? true : false
-
-        // // compare the password 
         // const compare = bycrypt.compare(req.body.password, User.password)
-        // const compare = await argon.verify(User.password, req.body.password)
         if (!compare) return res.status(404).json({ message: "Password Incorrect" })
+
         //  jenerate the jwt token  
         const token = jwt.sign(rest, process.env.SECRET_CODE)
         res.header("access-token", token)

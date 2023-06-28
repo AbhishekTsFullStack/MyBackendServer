@@ -6,7 +6,7 @@ const passport = require('passport')
 const cookieSession = require('cookie-session')
 const passportSetup = require("./passport");
 const googleAuth = require('./Routers/GoogleAuth/GoogleAuth')
-const CustomerRouter = require('./Routers/UserRoutes/CustomerRoutes')
+const CustomerRouter = require('./Routers/AuthRouters/customerRouter')
 const ServiceRouter = require("./Routers/Services/ServicesRoutes")
 const utilRouter = require("./Routers/utils")
 const app = express()
@@ -37,7 +37,7 @@ const port = process.env.PORT
 app.get("/", (req, res) => {
     res.send("Chal gaya bhai ")
 })
-app.use("/auth", CustomerRouter);
+app.use("/customer", CustomerRouter);
 app.use("/services", ServiceRouter);
 app.use("/util", utilRouter);
 // app.use("/auth", googleAuth);

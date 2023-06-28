@@ -2,11 +2,6 @@ const router = require("express").Router()
 const { SignupUser, LoginUser, DeleteUsers, AllCustomer } = require("../../Controllers/AuthControllers/CustomerControllers")
 
 
-router.get("/hello", (req, res) => {
-    res.send("BHakkk yaha se ")
-})
-
-
 router.post("/signup", SignupUser);
 // login the user 
 router.post("/login", LoginUser);
@@ -16,7 +11,6 @@ router.delete("/deleteall", DeleteUsers);
 router.get("/getall", AllCustomer);
 // get the single user by id
 router.post("/get", AllCustomer);
-
 
 
 
