@@ -14,7 +14,7 @@ router.get("/get/:id", GetSingleServiceData);
 router.post("/deleteservice", DeleteServices);
 
 // delete by params id 
-router.post("/deleteservice/:id", DeleteByID);
+router.get("/deleteservice/:id", DeleteByID);
 // update the service 
 router.patch("/update", UpdateService);
 
