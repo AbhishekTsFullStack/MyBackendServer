@@ -34,7 +34,7 @@ app.use(
 );
 const port = process.env.PORT
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
     res.send("Chal gaya bhai ")
 })
 app.use("/auth", CustomerRouter);
