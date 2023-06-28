@@ -1,5 +1,4 @@
 const CustomerModel = require("../../Models/AuthModels/CustomerModel")
-const bycrypt = require('bcrypt');
 const jwt = require("jsonwebtoken")
 const { isEmail, isMobileNumber } = require("../utils");
 require('dotenv').config
@@ -18,14 +17,13 @@ const SignupUser = async (req, res) => {
         const isUserEmail = await CustomerModel.findOne({ email: req.body.email });
         if (isUserEmail) return res.status(409).json("This Email Address is already Registered")
 
-        // make the password as a hash password 
-        const salt = await bycrypt.genSalt(10)
-        const hashPassword = await bycrypt.hash(req.body.password, salt)
+        // // make the password as a hash password 
+        // const salt = await bycrypt.genSalt(10)
+        // const hashPassword = await bycrypt.hash(req.body.password, salt)
 
         // my formdata
         const formdata = new CustomerModel({
             ...req.body,
-            password: hashPassword
         })
 
         const saveData = await formdata.save()
@@ -57,9 +55,9 @@ const LoginUser = async (req, res) => {
         if (!User) return res.status(404).json({ message: `${dataType} Incorrect` });
         const { password, ...rest } = User
 
-        // compare the password 
-        const compare = bycrypt.compare(req.body.password, User.password)
-        if (!compare) return res.status(404).json({ message: "Password Incorrect" })
+        // // compare the password 
+        // const compare = bycrypt.compare(req.body.password, User.password)
+        // if (!compare) return res.status(404).json({ message: "Password Incorrect" })
 
         //  jenerate the jwt token  
         const token = jwt.sign(rest, process.env.SECRET_CODE)
