@@ -94,8 +94,28 @@ const DeleteUsers = (req, res) => {
 
 const AllCustomer = async (req, res) => {
     try {
+
         // check the user 
         const isUser = await CustomerModel.find(req.body)
+        if (!isUser) return res.status(404).json({
+            error: true,
+            message: "No user found",
+        })
+
+        res.status(200).json({
+            error: false,
+            data: isUser
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+const GetCustomer = async (req, res) => {
+    try {
+
+        const id = req.params.id
+        // check the user 
+        const isUser = await CustomerModel.findById(id)
         if (!isUser) return res.status(404).json({
             error: true,
             message: "No user found",
@@ -113,4 +133,4 @@ const AllCustomer = async (req, res) => {
 
 
 
-module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer }
+module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer }

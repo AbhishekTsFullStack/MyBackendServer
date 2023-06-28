@@ -43,6 +43,25 @@ const GetAllServices = async (req, res) => {
         })
     }
 }
+const GetSingleServiceData = async (req, res) => {
+
+    try {
+        const id = req.params.id
+        // get all the services 
+        const AllServices = await ServiceModal.findById(id)
+        if (!AllServices) return res.status(400).json("No data Found")
+
+        res.status(200).json({
+            error: false,
+            data: AllServices
+        })
+    } catch (error) {
+        res.status(500).json({
+            error: true,
+            error: error
+        })
+    }
+}
 
 const DeleteServices = async (req, res) => {
     try {
@@ -86,6 +105,6 @@ const UpdateService = async (req, res) => {
 
 
 
-module.exports = { AddService, GetAllServices, DeleteServices, UpdateService }
+module.exports = { AddService, GetAllServices, DeleteServices, UpdateService, GetSingleServiceData }
 
 

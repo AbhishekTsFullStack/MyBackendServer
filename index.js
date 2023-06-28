@@ -9,6 +9,7 @@ const googleAuth = require('./Routers/GoogleAuth/GoogleAuth')
 const CustomerRouter = require('./Routers/AuthRouters/customerRouter')
 const ServiceRouter = require("./Routers/Services/ServicesRoutes")
 const utilRouter = require("./Routers/utils")
+const SupervisorRouter = require("./Routers/AuthRouters/SurvisorRouter")
 const app = express()
 // varibles
 
@@ -35,10 +36,11 @@ app.use(
 const port = process.env.PORT
 
 app.get("/", (req, res) => {
-    res.send("Chal gaya bhai ")
+    res.send("Chal gaya bhai api ke saath bhi ")
 })
 app.use("/customer", CustomerRouter);
-app.use("/services", ServiceRouter);
+app.use("/service", ServiceRouter);
+app.use("/supervisor", SupervisorRouter);
 app.use("/util", utilRouter);
 // app.use("/auth", googleAuth);
 
