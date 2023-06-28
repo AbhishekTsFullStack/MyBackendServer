@@ -10,7 +10,7 @@ app.use(experess.json())
 
 app.use("/customer", CustomerRouter);
 app.use("/", (req, res) => {
-    res.send("Bhai bcrypt bhi chal raha hai ")
+    res.send("Bhai Dependencies Sari installed ho gai ab File dalo")
 })
 
 
