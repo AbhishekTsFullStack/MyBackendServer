@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { AddService, GetAllServices, DeleteServices, UpdateService, GetSingleServiceData } = require("../../Controllers/Services/ServicesController")
+const { AddService, GetAllServices, DeleteServices, UpdateService, GetSingleServiceData, DeleteByID } = require("../../Controllers/Services/ServicesController")
 
 
 // add the service 
@@ -12,6 +12,9 @@ router.post("/get", GetAllServices);
 router.get("/get/:id", GetSingleServiceData);
 // delete by sevice id 
 router.post("/deleteservice", DeleteServices);
+
+// delete by params id 
+router.post("/deleteservice/:id", DeleteByID);
 // update the service 
 router.patch("/update", UpdateService);
 
