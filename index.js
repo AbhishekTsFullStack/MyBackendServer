@@ -10,7 +10,7 @@ app.use(experess.json())
 
 app.use("/customer", CustomerRouter);
 app.use("/", (req, res) => {
-    res.send("Chal gaaya bhai")
+    res.send("Bhai abhi bhi chal rha hai")
 })
 
 
