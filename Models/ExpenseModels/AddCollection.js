@@ -42,6 +42,8 @@ const schema = new mongoose.Schema({
         required: true,
     },
     remark: String,
+}, {
+    timestamps: true
 })
 
 const AddCollectionModel = mongoose.model("collections", schema);
