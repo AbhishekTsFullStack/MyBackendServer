@@ -3,9 +3,9 @@ const router = require("express").Router()
 
 // storage 
 const storage = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, "./static/uploads")
-    },
+    destination: (req, file, cb) => {
+        cb(null, "./static/uploads");
+      },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
         cb(null, uniqueSuffix + "-" + file.originalname);
