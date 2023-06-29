@@ -40,7 +40,7 @@ const GetAll = async (req, res) => {
 const UpadateHeadExpense = async (req, res) => {
     try {
         const id = req.body._id
-        const result = HeadExpModel.findByIdAndUpdate(id, req.body, { new: true })
+        const result = await HeadExpModel.findByIdAndUpdate(id, req.body, { new: true })
         if (!result) return res.status(400).json({ error: true, message: "NO Data Found" })
 
         res.status(200).json({ error: false, data: result })
