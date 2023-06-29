@@ -10,7 +10,7 @@ const AddHeadExpense = async (req, res) => {
     try {
         // check in the db 
         const isAdded = await HeadExpModel.find({ expName: formData.expName });
-        if (isAdded) return res.status(409).json({ error: true, message: "Already Registered" });
+        if (!isAdded) return res.status(409).json({ error: true, message: "Already Registered" });
         // save the data on the dp 
         const result = await new HeadExpModel(formData).save()
         if (!result) return res.status(400).json({ error: true, message: "Not Added Facing Issue Try Again" })
