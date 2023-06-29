@@ -37,7 +37,7 @@ const GetAllExpense = async (req, res) => {
 const UpdateExpenseById = async (req, res) => {
     try {
         const id = req.body._id
-        const result = AddExpenseModel.findByIdAndUpdate(id, req.body, { new: true })
+        const result = await AddExpenseModel.findByIdAndUpdate(id, req.body, { new: true })
         if (!result) return res.status(400).json({ error: true, message: "Not Update Please Try Again" })
 
         res.status(200).json({ error: false, data: result })
