@@ -5,7 +5,7 @@ const AddCollection = async (req, res) => {
     const formData = req.body
     try {
         // check in the db 
-        const isAdded = await AddCollectionModel.find({ orderNo: formData.orderNo });
+        const isAdded = await AddCollectionModel.findOne({ orderNo: formData.orderNo });
         if (isAdded) return res.status(409).json({ error: true, message: "Already Registered" });
         // save the data on the dp 
         const result = await new AddCollectionModel(formData).save()
