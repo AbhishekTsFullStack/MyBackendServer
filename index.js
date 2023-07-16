@@ -30,7 +30,7 @@ app.use(passport.session());
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000","https://trackel-helper-frontend.vercel.app"],
         credentials: true,
     })
 );
