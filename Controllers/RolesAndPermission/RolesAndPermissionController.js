@@ -28,16 +28,16 @@ const GetRoles = async (req, res) => {
     try {
         let result;
         if (reqRole === roles.super) {
-            result = await SuperAdminRolesModel.find({})
+            result = await SuperAdminRolesModel.findOne({})
         }
         else if (reqRole === roles.admin) {
-            result = await AdminRolesModel.find({})
+            result = await AdminRolesModel.findOne({})
         } else if (reqRole === roles.office) {
-            result = await BackofficeRoleModel.find({})
+            result = await BackofficeRoleModel.findOne({})
         } else if (reqRole === roles.service) {
-            result = await ServiceProviderRolesModel.find({})
+            result = await ServiceProviderRolesModel.findOne({})
         } else if (reqRole === roles.supervisor) {
-            result = await SuperVisorRolesModel.find({})
+            result = await SuperVisorRolesModel.findOne({})
         } else {
             result = result
         }
