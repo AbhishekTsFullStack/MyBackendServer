@@ -1,8 +1,11 @@
-const credentials = {
-    web: {
-       
-    }
+const roles = {
+    super: "super",
+    admin: "admin",
+    office: "office",
+    service: "service",
+    supervisor: "supervisor"
 }
 
 
-export { credentials }
+
+module.exports = { roles }

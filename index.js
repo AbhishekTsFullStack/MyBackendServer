@@ -9,6 +9,7 @@ const googleAuth = require('./Routers/GoogleAuth/GoogleAuth')
 const CustomerRouter = require('./Routers/AuthRouters/customerRouter')
 const ServiceRouter = require("./Routers/Services/ServicesRoutes")
 const utilRouter = require("./Routers/utils")
+const RolesRoutes = require("./Routers/RolesManageRoutes/RolesRoutes")
 const SupervisorRouter = require("./Routers/AuthRouters/SurvisorRouter")
 const ExpenseRouters = require('./Routers/ExpensesRouters/ExpenseRouters')
 const app = express()
@@ -30,7 +31,7 @@ app.use(passport.session());
 
 app.use(
     cors({
-        origin: ["http://localhost:3000","https://trackel-helper-frontend.vercel.app"],
+        origin: ["http://localhost:3000", "https://trackel-helper-frontend.vercel.app"],
         credentials: true,
     })
 );
@@ -43,6 +44,7 @@ app.use("/customer", CustomerRouter);
 app.use("/service", ServiceRouter);
 app.use("/expense", ExpenseRouters);
 app.use("/supervisor", SupervisorRouter);
+app.use("/roles", RolesRoutes)
 app.use("/util", utilRouter);
 // app.use("/auth", googleAuth);
 app.use(express.static("./static"));

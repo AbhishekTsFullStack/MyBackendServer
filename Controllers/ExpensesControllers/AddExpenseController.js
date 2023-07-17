@@ -60,7 +60,7 @@ const DeleteExpById = async (req, res) => {
 }
 
 // delete all the expenses head
-const DeleteAllExpenses = async (req, res) => {
+const DeleteAllExpenses = (req, res) => {
     // delete the data 
 
     AddExpenseModel.deleteMany({}).then(() => {
