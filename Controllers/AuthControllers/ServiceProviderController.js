@@ -1,22 +1,21 @@
-
-const EmployeeModel = require("../../Models/AuthModels/EmployeeModel");
+const ServiceProviderModel = require("../../Models/AuthModels/ServiceProviderModel")
+const { isEmail, isMobileNumber } = require("../utils")
 const jwt = require("jsonwebtoken");
-const { isEmail, isMobileNumber } = require("../utils");
 require("dotenv").config();
 
 
 
 // Add the Service Provider
-const AddEmployee = async (req, res) => {
+const AddServiceProvider = async (req, res) => {
     const formdata = req.body
 
     // check the service provider is already register or not 
-    const isUser = await EmployeeModel.findOne({ mobileNo: formdata.mobileNo })
+    const isUser = await ServiceProviderModel.findOne({ mobileNo: formdata.mobileNo })
     if (isUser) return res.status(409).json({ error: true, message: "User Already Registered with this Mobile No." })
 
     try {
         // register the service provider 
-        const isReg = await new EmployeeModel(formdata).save()
+        const isReg = await new ServiceProviderModel(formdata).save()
         if (!isReg) return res.status(400).json({ error: true, message: "Not Register Please Try Again" })
 
         res.status(200).json({ error: false, data: isReg })
@@ -28,48 +27,51 @@ const AddEmployee = async (req, res) => {
 
 // Login THe service provder 
 
-const LoginEmployee = async (req, res) => {
-    const { email, pass } = req.params;
+const LoginServiceProvider = async (req, res) => {
+    const { email, password } = req.body; // Use req.body instead of req.params
     try {
         // find the data type user email or mobile no 
-        const dataType = isEmail(email) === true ? "email" : isMobileNumber(email) === true ? "mobileNo" : "Invalid Credential"
-        if (dataType === "Invalid Credential") return res.status(400).json({ error: true, message: "Please Enter the Valid Email Or Mobile Number", })
+        const dataType = isEmail(email) === true ? "email" : isMobileNumber(email) === true ? "mobileNo" : "Invalid Credential";
+        if (dataType === "Invalid Credential") {
+            return res.status(400).json({ error: true, message: "Please Enter the Valid Email Or Mobile Number" });
+        }
 
+        const CheckField = { [dataType]: email };
 
-        const CheckField = { [dataType]: email }
+        // find the user 
+        const isUser = await ServiceProviderModel.findOne(CheckField);
+        if (!isUser) {
+            return res.status(404).json({ error: true, message: "No user found" });
+        }
 
-        // find the uer 
-        const isUser = await EmployeeModel.findOne(CheckField)
-        if (!isUser) return res.status(404).json({ error: true, message: "No user found" })
-
-        // compare the password 
-
-        const compare = isUser.password === pass
-        if (!compare) return res.status(404).json({ error: true, message: "Invalid Password" })
+        const compare = isUser.password === password;
+        if (!compare) {
+            return res.status(404).json({ error: true, message: "Invalid Password" });
+        }
 
         // Convert the Mongoose document to a plain JavaScript object
         const userWithoutPassword = isUser.toObject();
         delete userWithoutPassword.password; // Remove the password from the object
 
-        //  generate the jwt token  
-        const token = jwt.sign(userWithoutPassword, process.env.SECRET_CODE)
-        res.header("access-token", token)
-        res.status(200).json(userWithoutPassword)
+        // generate the jwt token  
+        const token = jwt.sign(userWithoutPassword, process.env.SECRET_CODE);
+        res.header("access-token", token);
+        res.status(200).json(userWithoutPassword);
 
     } catch (error) {
-        res.status(500).json({ error })
+        res.status(500).json({ error });
     }
 }
-
+``
 
 
 // Update the data 
-const UpdateTheEmployeeData = async (req, res) => {
+const UpdateTheServiceProvider = async (req, res) => {
     const updatedData = req.body;
     const id = req.params.id
 
     try {
-        const isUpdated = await EmployeeModel.findByIdAndUpdate(id, updatedData, { new: true })
+        const isUpdated = await ServiceProviderModel.findByIdAndUpdate(id, updatedData, { new: true })
         if (!isUpdated) return res.status(400).json({ error: true, message: "Updation Failed Retry" })
 
         res.status(200).json({ error: false, data: isUpdated })
@@ -80,12 +82,12 @@ const UpdateTheEmployeeData = async (req, res) => {
 
 
 // delete the data by id 
-const DeleteTheEmployeeData = async (req, res) => {
+const DeleteTheServiceProvider = async (req, res) => {
     const id = req.params.id
 
     try {
         // find the user and delete 
-        const isDeleted = await EmployeeModel.findByIdAndDelete(id)
+        const isDeleted = await ServiceProviderModel.findByIdAndDelete(id)
         if (!isDeleted) return res.status(400).json({ error: true, message: "Not deleted try Again" })
 
         res.status(200).json({ error: false, message: "Deleted Successfully" })
@@ -97,10 +99,10 @@ const DeleteTheEmployeeData = async (req, res) => {
 
 
 // Delete all 
-const DeleteAllEmployeeData = async (req, res) => {
+const DeleteAllServiceVendor = async (req, res) => {
 
     try {
-        const isDeleted = await EmployeeModel.deleteMany({})
+        const isDeleted = await ServiceProviderModel.deleteMany({})
         if (isDeleted) {
             res.status(200).json({ error: false, message: "Deleted Successfully" })
         } else {
@@ -115,9 +117,9 @@ const DeleteAllEmployeeData = async (req, res) => {
 
 // get all the service provider
 
-const GetAllEmployeeData = async (req, res) => {
+const GetAllTheServiceProvider = async (req, res) => {
     try {
-        const result = await EmployeeModel.find({})
+        const result = await ServiceProviderModel.find({})
         if (!result) return res.status(400).json({ error: true, message: "No Data Found" })
 
         res.status(200).json({ error: false, data: result })
@@ -128,11 +130,11 @@ const GetAllEmployeeData = async (req, res) => {
 
 
 // get data by id 
-const GetEmployeeById = async (req, res) => {
+const GetDataById = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const result = await EmployeeModel.findById(id)
+        const result = await ServiceProviderModel.findById(id)
         if (!result) return res.status(404).json({ error: true, message: "No User Found" })
 
         res.status(200).json({ error: false, data: result })
@@ -142,4 +144,4 @@ const GetEmployeeById = async (req, res) => {
 }
 
 
-module.exports = { AddEmployee, LoginEmployee, UpdateTheEmployeeData, DeleteTheEmployeeData, DeleteAllEmployeeData, GetAllEmployeeData, GetEmployeeById }
+module.exports = { AddServiceProvider, LoginServiceProvider, UpdateTheServiceProvider, DeleteTheServiceProvider, DeleteAllServiceVendor, GetAllTheServiceProvider, GetDataById }
