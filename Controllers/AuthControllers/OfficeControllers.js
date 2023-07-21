@@ -29,7 +29,7 @@ const AddEmployee = async (req, res) => {
 // Login THe service provder 
 
 const LoginEmployee = async (req, res) => {
-    const { email, pass } = req.params;
+    const { email, password } = req.body;
     try {
         // find the data type user email or mobile no 
         const dataType = isEmail(email) === true ? "email" : isMobileNumber(email) === true ? "mobileNo" : "Invalid Credential"
@@ -44,7 +44,7 @@ const LoginEmployee = async (req, res) => {
 
         // compare the password 
 
-        const compare = isUser.password === pass
+        const compare = isUser.password === password
         if (!compare) return res.status(404).json({ error: true, message: "Invalid Password" })
 
         // Convert the Mongoose document to a plain JavaScript object

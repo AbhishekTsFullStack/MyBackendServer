@@ -1,6 +1,7 @@
 const AdminModel = require("../../Models/AuthModels/AdminModel");
 const jwt = require("jsonwebtoken")
 const { isEmail, isMobileNumber } = require("../utils");
+require('dotenv').config();
 
 
 
