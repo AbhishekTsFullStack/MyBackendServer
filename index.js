@@ -14,7 +14,7 @@ const EmployeeRoutes = require("./Routers/AuthRouters/OfficeRouter")
 const SupervisorRouter = require("./Routers/AuthRouters/SurvisorRouter")
 const ServiceRoutes = require("./Routers/AuthRouters/ServiceProviderRoutes")
 const ExpenseRouters = require('./Routers/ExpensesRouters/ExpenseRouters')
-const AdminRoutes = require("./Routers/AuthRouters/AdminRouters")
+const SuperAdminRoutes = require("./Routers/AuthRouters/SuperAdminRoutes")
 const app = express()
 // varibles
 
@@ -49,7 +49,7 @@ app.use("/expense", ExpenseRouters);
 app.use("/employee", EmployeeRoutes);
 app.use("/service-provider", ServiceRoutes);
 app.use("/roles", RolesRoutes);
-app.use("/admin", AdminRoutes);
+app.use("/admin", SuperAdminRoutes);
 app.use("/util", utilRouter);
 // app.use("/auth", googleAuth);
 app.use(express.static("./static"));
