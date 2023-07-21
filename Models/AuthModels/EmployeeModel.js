@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
         type: String,
         default: "Office"
     },
+    role: String,
     designationName: {
         type: String,
         enum: ["admin", "supervisor", "back office"],
