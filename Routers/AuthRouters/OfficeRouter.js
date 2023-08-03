@@ -4,7 +4,7 @@ const { AddEmployee, LoginEmployee, UpdateTheEmployeeData, DeleteTheEmployeeData
 // add serviceProvier Route
 router.post("/add", AddEmployee);
 // Login In service provider
-router.post("/login", LoginEmployee)
+router.post("/login/:logger", LoginEmployee)
 // update the service provider 
 router.patch("/update/:id", UpdateTheEmployeeData);
 // Delete The service PRovider 

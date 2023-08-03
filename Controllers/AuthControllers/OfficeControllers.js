@@ -26,10 +26,17 @@ const AddEmployee = async (req, res) => {
 }
 
 
+const roles = {
+    admin: "Admin",
+    office: "Back Office",
+    supervisor: "supervisor"
+}
+
 // Login THe service provder 
 
 const LoginEmployee = async (req, res) => {
     const { email, password } = req.body;
+    const { logger } = req.params;
     try {
         // find the data type user email or mobile no 
         const dataType = isEmail(email) === true ? "email" : isMobileNumber(email) === true ? "mobileNo" : "Invalid Credential"
@@ -42,6 +49,7 @@ const LoginEmployee = async (req, res) => {
         const isUser = await EmployeeModel.findOne(CheckField)
         if (!isUser) return res.status(404).json({ error: true, message: "No user found" })
 
+        if (isUser.role !== roles[`${logger}`]) return res.status(404).json({ error: true, message: `Please Login In As per your Post ` }); console.log("Login as per your role")
         // compare the password 
 
         const compare = isUser.password === password

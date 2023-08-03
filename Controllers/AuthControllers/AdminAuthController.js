@@ -54,7 +54,6 @@ const LoginAdmin = async (req, res) => {
         const userWithoutPassword = isUser.toObject();
         delete userWithoutPassword.password; // Remove the password from the object
 
-        console.log("yaha tak aya ")
         // generate the jwt token
         const token = jwt.sign(userWithoutPassword, process.env.SECRET_CODE);
         res.header("access-token", token);
