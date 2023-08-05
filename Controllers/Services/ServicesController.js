@@ -119,7 +119,31 @@ const UpdateService = async (req, res) => {
 }
 
 
+const GetTheService = async (req, res) => {
 
-module.exports = { AddService, GetAllServices, DeleteServices, UpdateService, GetSingleServiceData, DeleteByID }
+    const { serviceName } = req.query;
+
+    const search = {}
+
+
+    if (serviceName) {
+        search.serviceName = { $regex: serviceName, $options: "i" }
+    }
+
+
+
+    try {
+        const response = await ServiceModal.find(search)
+        if (!response) return res.status(404).json({ error: true, message: "No Service Found" })
+
+        res.status(200).json({ error: false, data: response })
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+}
+
+
+
+module.exports = { AddService, GetAllServices, DeleteServices, UpdateService, GetSingleServiceData, DeleteByID, GetTheService }
 
 
