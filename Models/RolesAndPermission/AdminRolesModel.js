@@ -44,7 +44,11 @@ const schema = new mongoose.Schema({
     RolesAndPermission: Boolean,
 
     // Profile
-    Profile: String
+    Profile: String,
+
+    // Add New Permission
+    Analytics:Boolean,
+    
 })
 
 const AdminRolesModel = mongoose.model("admin-roles", schema)

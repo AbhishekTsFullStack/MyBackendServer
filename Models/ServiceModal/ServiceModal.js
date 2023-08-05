@@ -13,6 +13,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    details: {
+        type: String,
+    },
     adminStatus: String,
     block: Boolean,
 }, {
