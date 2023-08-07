@@ -38,7 +38,7 @@ app.use(
         credentials: true,
     })
 );
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 
 app.get("/", (req, res) => {
     res.send("Chal gaya bhai api ke saath bhi ")
