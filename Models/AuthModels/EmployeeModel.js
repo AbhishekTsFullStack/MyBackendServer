@@ -63,6 +63,12 @@ const schema = new mongoose.Schema({
     },
     documentTwoImg: {
         type: String,
+    },
+    documentThree: {
+        type: String
+    },
+    documentThreeImg: {
+        type: String
     }
 })
 
