@@ -4,13 +4,10 @@ const mongoose = require("mongoose")
 const schema = new mongoose.Schema({
     departName: {
         type: String,
-        default: "Office"
     },
     role: String,
     designationName: {
         type: String,
-        enum: ["admin", "supervisor", "back office"],
-        default: "admin"
     },
     refName: {
         type: String,
@@ -68,6 +65,9 @@ const schema = new mongoose.Schema({
         type: String
     },
     documentThreeImg: {
+        type: String
+    },
+    empId: {
         type: String
     }
 })
