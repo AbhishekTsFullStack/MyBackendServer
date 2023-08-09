@@ -41,7 +41,7 @@ app.use(
 const port = process.env.PORT || 5000
 
 app.get("/", (req, res) => {
-    res.send("Chal gaya bhai api ke saath bhi ")
+    res.send("Welcome to the Helper Services")
 })
 app.use("/customer", CustomerRouter);
 app.use("/service", ServiceRouter);
