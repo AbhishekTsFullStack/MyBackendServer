@@ -2,6 +2,8 @@
 const CustomerModel = require("../../Models/AuthModels/CustomerModel")
 const jwt = require("jsonwebtoken")
 const { isEmail, isMobileNumber } = require("../utils");
+const generateCustomerID = require("../misc/customeridgenerator");
+const generateOrderNo = require("../misc/orderNoGenerator");
 require('dotenv').config
 
 
@@ -25,11 +27,11 @@ const SignupUser = async (req, res) => {
         // // make the password as a hash password 
         // const salt = await bycrypt.genSalt(10)
         // const hashPassword = await bycrypt.hash(req.body.password, salt)
-
+        const customerid = await generateCustomerID()
         // my formdata
         const formdata = new CustomerModel({
             ...req.body,
-
+            customerId: customerid
         })
 
         const saveData = await formdata.save()

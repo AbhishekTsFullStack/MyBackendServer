@@ -2,21 +2,28 @@
 const EmployeeModel = require("../../Models/AuthModels/EmployeeModel");
 const jwt = require("jsonwebtoken");
 const { isEmail, isMobileNumber } = require("../utils");
+const generateEmployeeId = require("../misc/employeeIdGenerator");
 require("dotenv").config();
-
 
 
 // Add the Service Provider
 const AddEmployee = async (req, res) => {
-    const formdata = req.body
 
+    const formdata = req.body
     // check the service provider is already register or not 
     const isUser = await EmployeeModel.findOne({ mobileNo: formdata.mobileNo })
     if (isUser) return res.status(409).json({ error: true, message: "User Already Registered with this Mobile No." })
 
+    // Employee Id Generate
+
+    const EmployeeID = await generateEmployeeId()
+
     try {
         // register the service provider 
-        const isReg = await new EmployeeModel(formdata).save()
+        const isReg = await new EmployeeModel({
+            ...formdata,
+            empId: EmployeeID
+        }).save()
         if (!isReg) return res.status(400).json({ error: true, message: "Not Register Please Try Again" })
 
         res.status(200).json({ error: false, data: isReg })

@@ -27,7 +27,10 @@ const schema = new mongoose.Schema({
     recievedAmt: Number,
     balanceAmt: Number,
     paymentMethod: String,
-    freeServices: []
+    freeServices: [],
+    customerId: String,
+    // bookings
+    bookings: Array,
 }, {
     timestamps: true
 })
