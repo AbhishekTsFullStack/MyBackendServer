@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
     customerName: String,
     type: String,
     bookTime: Date,
+    serviceName: String,
     serviceDetails: String,
     // supervisor 
     supervisor: String,

@@ -1,17 +1,17 @@
-require('dotenv').config()
-require("./connection")
-const express = require("express")
-const cors = require("cors")
+require('dotenv').config();
+require("./connection");
+const express = require("express");
+const cors = require("cors");
 const passport = require('passport')
 const cookieSession = require('cookie-session')
-const passportSetup = require("./passport");
-const googleAuth = require('./Routers/GoogleAuth/GoogleAuth')
 const CustomerRouter = require('./Routers/AuthRouters/customerRouter')
 const ServiceRouter = require("./Routers/Services/ServicesRoutes")
 const utilRouter = require("./Routers/utils")
 const RolesRoutes = require("./Routers/RolesManageRoutes/RolesRoutes")
 const EmployeeRoutes = require("./Routers/AuthRouters/OfficeRouter")
 const ServiceRoutes = require("./Routers/AuthRouters/ServiceProviderRoutes")
+const OrderRouters = require('./Routers/OrdersRoutes/BookingRoutes')
+const EnquiryRouters = require('./Routers/enquiryRoutes')
 const ExpenseRouters = require('./Routers/ExpensesRouters/ExpenseRouters')
 const SuperAdminRoutes = require("./Routers/AuthRouters/SuperAdminRoutes")
 const app = express()
@@ -50,6 +50,8 @@ app.use("/service-provider", ServiceRoutes);
 app.use("/roles", RolesRoutes);
 app.use("/admin", SuperAdminRoutes);
 app.use("/util", utilRouter);
+app.use("/order", OrderRouters);
+app.use('/enquiry', EnquiryRouters);
 // app.use("/auth", googleAuth);
 app.use(express.static("./static"));
 
