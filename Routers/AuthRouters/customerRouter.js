@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer } = require("../../Controllers/AuthControllers/CustomerControllers")
+const { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer, GetDeleteCustomerById } = require("../../Controllers/AuthControllers/CustomerControllers")
 
 
 router.post("/signup", SignupUser);
@@ -7,6 +7,8 @@ router.post("/signup", SignupUser);
 router.post("/login", LoginUser);
 // delete all 
 router.delete("/deleteall", DeleteUsers);
+// delete by id  
+router.get('/delete/:id', GetDeleteCustomerById)
 // all customers
 router.get("/getall", AllCustomer);
 // all customers

@@ -132,7 +132,19 @@ const GetCustomer = async (req, res) => {
     }
 }
 
+const GetDeleteCustomerById = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const response = await CustomerModel.findByIdAndDelete(id)
+        if (!response) return res.status(400).json({ error: true, message: 'no data found with this id ' })
+        res.status(200).json({ error: false, message: 'deleted successfully' })
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+}
 
 
 
-module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer }
+
+module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer, GetDeleteCustomerById }
