@@ -30,7 +30,7 @@ app.use(passport.session());
 
 app.use(
     cors({
-        origin: ["http://ec2-13-53-74-96.eu-north-1.compute.amazonaws.com", "http://localhost:3000", "https://trackel-helper-frontend.vercel.app"],
+        origin: ["http://ec2-3-111-248-12.ap-south-1.compute.amazonaws.com", "http://localhost:3000", "https://trackel-helper-frontend.vercel.app"],
         credentials: true,
     })
 );
