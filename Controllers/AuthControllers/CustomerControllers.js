@@ -152,7 +152,7 @@ const GetUpdateTheCustomer = async (req, res) => {
     try {
         const isUpdated = await CustomerModel.findByIdAndUpdate(id, {
             ...req.body
-        })
+        }, { new: true })
         if (isUpdated) return res.status(404).json({ error: true, message: 'Updation failed ! Try again' })
         res.status(200).json({ error: false, data: isUpdated, message: 'updated successfully' })
     } catch (error) {
