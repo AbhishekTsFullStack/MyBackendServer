@@ -145,6 +145,21 @@ const GetDeleteCustomerById = async (req, res) => {
 }
 
 
+// update the customer data
+const GetUpdateTheCustomer = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const isUpdated = await CustomerModel.findByIdAndUpdate(id, {
+            ...req.body
+        })
+        if (isUpdated) return res.status(404).json({ error: true, message: 'Updation failed ! Try again' })
+        res.status(200).json({ error: false, data: isUpdated, message: 'updated successfully' })
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+}
 
 
-module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer, GetDeleteCustomerById }
+
+module.exports = { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer, GetDeleteCustomerById, GetUpdateTheCustomer }

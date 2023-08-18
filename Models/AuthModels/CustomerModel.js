@@ -8,9 +8,11 @@ const schema = new mongoose.Schema({
     address: String,
     password: String,
     landmark: String,
+    pinCode: String,
     email: String,
     location: String,
     mobileNo: Number,
+    // useless things 
     telNo: Number,
     officeNo: Number,
     alternateNo: Number,
@@ -20,8 +22,13 @@ const schema = new mongoose.Schema({
     houseStatus: String,
     dob: Date,
     doa: Date,
+    // useless things
+
     image: String,
+    // useLess things
     spouseDetails: {},
+
+    
     payment: Number,
     discountAmt: Number,
     recievedAmt: Number,
