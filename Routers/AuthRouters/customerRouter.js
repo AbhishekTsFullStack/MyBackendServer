@@ -4,7 +4,7 @@ const { SignupUser, LoginUser, DeleteUsers, AllCustomer, GetCustomer, GetDeleteC
 
 router.post("/signup", SignupUser);
 // login the user 
-router.post("/login", LoginUser);
+router.get("/login", LoginUser);
 // delete all 
 router.delete("/deleteall", DeleteUsers);
 // delete by id  

@@ -11,6 +11,6 @@ const schema = new Schema(
   }
 );
 
-const VerifyModel = model("otp", schema);
+const VerifyModel = model("otps", schema);
 
 module.exports = VerifyModel;

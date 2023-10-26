@@ -4,7 +4,7 @@ const { AddServiceProvider, LoginServiceProvider, UpdateTheServiceProvider, Dele
 // add serviceProvier Route
 router.post("/add", AddServiceProvider);
 // Login In service provider
-router.post("/login", LoginServiceProvider)
+router.get("/login", LoginServiceProvider)
 // update the service provider 
 router.patch("/update/:id", UpdateTheServiceProvider);
 // Delete The service PRovider 
