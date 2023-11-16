@@ -15,6 +15,7 @@ const EnquiryRouters = require("./Routers/enquiryRoutes");
 const ExpenseRouters = require("./Routers/ExpensesRouters/ExpenseRouters");
 const SuperAdminRoutes = require("./Routers/AuthRouters/SuperAdminRoutes");
 const VerifyRoutes = require("./Routers/Verify");
+const NewCustomerRoutes = require("./Routers/NewCustomerRouters/NewCustomerRoute")
 const app = express();
 
 // Middleware section
@@ -59,6 +60,7 @@ app.use("/util", utilRouter);
 app.use("/order", OrderRouters);
 app.use("/enquiry", EnquiryRouters);
 app.use("/verify", VerifyRoutes);
+app.use('/', NewCustomerRoutes)
 
 // Static files
 app.use(express.static("./static"));
