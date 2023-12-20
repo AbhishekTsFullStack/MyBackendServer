@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    expName: {
+    name: {
         type: String,
         required: true
     }

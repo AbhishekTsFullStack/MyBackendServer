@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const {
   AddHeadExpense,
+  ExpenseHeadById,
   UpadateHeadExpense,
   DeleteById,
-  DeletaAll,
-  GetAll,
+ GetAllExpenseHead,
 } = require("../../Controllers/ExpensesControllers/ExpenseHeadControllers");
 const {
   AddCollection,
@@ -21,16 +21,14 @@ const {
   UpdateExpenseById,
 } = require("../../Controllers/ExpensesControllers/AddExpenseController");
 
-// add the Expense Head
-router.post("/add", AddHeadExpense);
-// get all the expenses
-router.get("/getall", GetAll);
-// update the head data
-router.patch("/updateheadexpense/:id", UpadateHeadExpense);
-// delete the expense head
-router.get("/delete/:id", DeleteById);
+// Expense Head Api
+router.post("/expense-head/add", AddHeadExpense);
+router.get("/expense-head/:id", ExpenseHeadById);
+router.get("/expense-head", GetAllExpenseHead);
+router.put("/expense-head/:id", UpadateHeadExpense);
+router.delete("/expense-head/:id", DeleteById);
 // delte all the expense head
-router.delete("/deleteall", DeletaAll);
+// router.delete("/deleteall", DeletaAll);
 
 // collection Operation Apis
 router.post("/addcollection", AddCollection);
